@@ -1,0 +1,6 @@
+sector,share,role,solution,note
+Industry,22,waits,Electric furnaces,
+Buildings,12,waits,Efficient cooling,
+Transport,9,waits,Electric two- and three-wheelers,
+Power,37,gate,"Solar and wind, plus storage and wires",
+Farming,20,outside,Better cattle feed; rice grown drier,"Its carbon is methane from cattle and from flooded fields, not from burning fuel. No amount of clean electricity touches it."

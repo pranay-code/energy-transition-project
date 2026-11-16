@@ -1,0 +1,219 @@
+/* ==========================================================================
+   Design tokens - colour, type and page geometry.
+   Every value here is taken directly from the design specification.
+   Nothing in this file should be changed without changing the spec first.
+   ========================================================================== */
+
+/* --- Typefaces -----------------------------------------------------------
+   Both SIL Open Font License, both self-hosted so the render has no network
+   dependency.
+
+   These are the STATIC cuts, one file per weight, not the variable ones. The
+   variable files were used until 8 August 2026 and had to go: Chrome's PDF
+   writer cannot instance a variable font, so it fell back to emitting every
+   glyph as a Type 3 drawing procedure. A Type 3 PDF fails Acrobat preflight,
+   cannot be made PDF/X or PDF/A, and is not reliably searchable at a printer.
+   It also fragmented the text - within one word the letters came from one
+   Type 3 subset and the hyphens, digits and apostrophes from another, which is
+   what put the visible gaps in "non - fossil" and "2031 - 32". Static faces
+   embed as ordinary TrueType and both problems go with them.
+
+   The cost is the `opsz` axis: a 40 pt cover title and 10 pt body now use the
+   same drawing rather than an optically sized one. At these sizes that is a
+   change nobody will see, and a font a printer refuses is not a trade.
+
+   Four sans weights are declared because the stylesheet uses four - 300 light,
+   400 regular, 500 medium, 600 semibold - and two serif weights for the same
+   reason. Each has a latin and a latin-ext file. Leaving a weight or a subset
+   out does not fail loudly; it silently substitutes another font mid-word.
+   ------------------------------------------------------------------------ */
+
+/* latin      : U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+                U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
+   latin-ext  : as shipped, plus U+20A0-20C0 whole, which carries the rupee
+                sign this report needs. */
+
+@font-face { font-family: "Report Sans"; font-style: normal; font-weight: 300; font-display: block;
+  src: url("../assets/fonts/inter-latin-300-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Report Sans"; font-style: normal; font-weight: 300; font-display: block;
+  src: url("../assets/fonts/inter-latin-ext-300-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "Report Sans"; font-style: italic; font-weight: 300; font-display: block;
+  src: url("../assets/fonts/inter-latin-300-italic.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Report Sans"; font-style: italic; font-weight: 300; font-display: block;
+  src: url("../assets/fonts/inter-latin-ext-300-italic.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "Report Sans"; font-style: normal; font-weight: 400; font-display: block;
+  src: url("../assets/fonts/inter-latin-400-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Report Sans"; font-style: normal; font-weight: 400; font-display: block;
+  src: url("../assets/fonts/inter-latin-ext-400-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "Report Sans"; font-style: italic; font-weight: 400; font-display: block;
+  src: url("../assets/fonts/inter-latin-400-italic.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Report Sans"; font-style: italic; font-weight: 400; font-display: block;
+  src: url("../assets/fonts/inter-latin-ext-400-italic.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "Report Sans"; font-style: normal; font-weight: 500; font-display: block;
+  src: url("../assets/fonts/inter-latin-500-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Report Sans"; font-style: normal; font-weight: 500; font-display: block;
+  src: url("../assets/fonts/inter-latin-ext-500-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "Report Sans"; font-style: italic; font-weight: 500; font-display: block;
+  src: url("../assets/fonts/inter-latin-500-italic.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Report Sans"; font-style: italic; font-weight: 500; font-display: block;
+  src: url("../assets/fonts/inter-latin-ext-500-italic.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "Report Sans"; font-style: normal; font-weight: 600; font-display: block;
+  src: url("../assets/fonts/inter-latin-600-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Report Sans"; font-style: normal; font-weight: 600; font-display: block;
+  src: url("../assets/fonts/inter-latin-ext-600-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "Report Sans"; font-style: italic; font-weight: 600; font-display: block;
+  src: url("../assets/fonts/inter-latin-600-italic.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Report Sans"; font-style: italic; font-weight: 600; font-display: block;
+  src: url("../assets/fonts/inter-latin-ext-600-italic.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "Report Serif"; font-style: normal; font-weight: 400; font-display: block;
+  src: url("../assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Report Serif"; font-style: normal; font-weight: 400; font-display: block;
+  src: url("../assets/fonts/source-serif-4-latin-ext-400-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "Report Serif"; font-style: italic; font-weight: 400; font-display: block;
+  src: url("../assets/fonts/source-serif-4-latin-400-italic.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Report Serif"; font-style: italic; font-weight: 400; font-display: block;
+  src: url("../assets/fonts/source-serif-4-latin-ext-400-italic.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "Report Serif"; font-style: normal; font-weight: 500; font-display: block;
+  src: url("../assets/fonts/source-serif-4-latin-500-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Report Serif"; font-style: normal; font-weight: 500; font-display: block;
+  src: url("../assets/fonts/source-serif-4-latin-ext-500-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "Report Serif"; font-style: italic; font-weight: 500; font-display: block;
+  src: url("../assets/fonts/source-serif-4-latin-500-italic.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Report Serif"; font-style: italic; font-weight: 500; font-display: block;
+  src: url("../assets/fonts/source-serif-4-latin-ext-500-italic.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+:root {
+  /* --- Brand spectrum. Also the categorical chart palette. -------------- */
+  --brand-teal: #0581a8;    /* series 1 - chapter accent            */
+  --brand-blue: #1a50a0;    /* PRIMARY accent - rules, numerals     */
+  --brand-violet: #5a439e;  /* series 3                             */
+  --brand-magenta: #902b94; /* series 4                             */
+  --brand-crimson: #c03d5b; /* series 5 - negative / decline        */
+
+  /* --- Neutrals --------------------------------------------------------- */
+  --ink: #0e1c2b;           /* body text, headlines                 */
+  --ink-secondary: #5a6b7a; /* decks, captions, axis labels         */
+  --ink-muted: #8a97a3;     /* notes, sources, footer               */
+  --rule: #d8dee4;          /* hairlines, table borders             */
+  --tint: #f4f6f8;          /* exhibit grounds, callout fills       */
+  --paper: #ffffff;         /* page                                 */
+
+  /* Set per chapter by a class on <body> or the chapter section. */
+  --accent: var(--brand-blue);
+
+  /* --- Page geometry ---------------------------------------------------- */
+  --trim-w: 210mm;
+  --trim-h: 297mm;
+  --margin-top: 20mm;
+  --margin-bottom: 18mm;
+  --margin-inner: 18mm;
+  --margin-outer: 16mm;
+  --live-w: 176mm;
+  --live-h: 263mm;
+  --col-w: 82mm;
+  --gutter: 8mm;
+
+  /* Single-column text measure. 130 mm at 10 pt is about 72 characters a line.
+     Text and exhibits share the same left edge; the spare 46 mm sits on the
+     outer side as margin. Centring the text instead left exhibits hanging off
+     to its left, which read as a fault rather than as a break-out. */
+  --measure: 130mm;
+  --bleed: 3mm;
+
+  /* --- Baseline grid ----------------------------------------------------
+     4.7625 mm = 13.5 pt. Every vertical measure is a multiple of this.
+     ---------------------------------------------------------------------- */
+  --baseline: 13.5pt;
+  --baseline-2: 27pt;
+  --baseline-3: 40.5pt;
+  --baseline-4: 54pt;
+  --half-baseline: 6.75pt;
+
+  /* --- Type scale. One row per line of the specification's table. ------- */
+  --t-cover-title: 40pt;      --l-cover-title: 44pt;
+  --t-cover-deck: 13pt;       --l-cover-deck: 19pt;
+  /* The heading on a front- or back-matter page: Contents, Notes and sources.
+     Both were being set with these two names before they existed here, which
+     made the whole `font:` shorthand invalid and dropped it - "Notes and
+     sources" printed at body size in the wrong family. Between the part title
+     at 40 pt and a question at 16 pt, on two baselines. */
+  --t-chapter-title: 22pt;    --l-chapter-title: 27pt;
+  --t-question: 16pt;         --l-question: 21pt;
+  /* The "2.4" standing above a question title. It was set at the exhibit-label
+     size, 7.5 pt, and disappeared - a reader could not use it to find a place
+     again. Half the question size reads as a companion to the title rather
+     than as a caption stuck above it. */
+  --t-question-number: 11pt;
+  --t-lede: 12pt;             --l-lede: 17pt;
+  --t-body: 10pt;             --l-body: 13.5pt;
+  --t-callout: 44pt;
+  --t-pullquote: 15pt;        --l-pullquote: 21pt;
+  --t-exhibit-title: 11pt;
+  --t-exhibit-subtitle: 8.5pt;
+  --t-exhibit-label: 7.5pt;
+  --t-notes: 6.5pt;           --l-notes: 9pt;
+  /* Not in the specification's table. The report's source lines and endnotes
+     are full paragraphs, not captions, and 6.5 pt over a paragraph is unkind
+     to the reader. One step up, still clearly subordinate to the body. */
+  --t-source: 8pt;            --l-source: 11.5pt;
+  --t-footer: 7.5pt;
+
+  /* Nothing below 6.5 pt anywhere - an acceptance criterion. */
+  --t-minimum: 6.5pt;
+
+  /* --- Weights ----------------------------------------------------------
+     "Sans light" in the spec is 300; medium is 500.
+     ---------------------------------------------------------------------- */
+  --w-light: 300;
+  --w-regular: 400;
+  --w-medium: 500;
+  --w-semibold: 600;
+
+  --font-serif: "Report Serif", Georgia, serif;
+  --font-sans: "Report Sans", "Segoe UI", sans-serif;
+
+  --hairline: 0.25pt;
+  --rule-medium: 0.5pt;
+  --rule-heavy: 1.5pt;
+}
+
+/* Lining, tabular figures wherever numbers are compared or aligned.
+   Required by the spec in all exhibits, tables and number columns. */
+.tnum,
+table,
+.exhibit,
+.callout-figure,
+.folio {
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  font-variant-numeric: tabular-nums lining-nums;
+}

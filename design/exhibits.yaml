@@ -1,0 +1,173 @@
+# Every exhibit in the report, in one place.
+#
+# Anatomy is fixed by the design specification and enforced by tools/build.py:
+#   number -> assertive title -> unit-and-scope subtitle -> chart -> note -> source
+#
+# Rules the build enforces, not just conventions:
+#   * `title` must be an assertion the reader can disagree with, never a label.
+#     "Power is not just the biggest slice" - not "Emissions by sector".
+#   * `source` is required. No exhibit renders without one.
+#   * `note` is required wherever any part of the figure is ours, illustrative
+#     or estimated rather than measured. Writing rule 4.3.
+#   * `data/<id>.csv` must exist for every charted exhibit.
+#   * width is one of half (40 mm), col (82 mm), full (172 mm), page (172x230 mm).
+
+exhibits:
+
+  - id: ex-sector-split
+    question: q-2-3
+    chart: grouped_hbar
+    width: full
+    title: >-
+      India's carbon sits in one slice far more than the world's does
+    subtitle: >-
+      Share of all greenhouse gases, percent, 2023. Land use excluded.
+      Each column adds to 100.
+    category: category
+    dp: 1
+    label_width: 44
+    value_width: 14
+    bar_height: 8
+    group_gap: 9
+    series:
+      - key: india
+        label: India
+        colour: "#1a50a0"
+      - key: world
+        label: World
+        colour: "#8a97a3"
+    note: >-
+      Ten reported categories grouped into six. Industry combines manufacturing
+      and construction with industrial process emissions. Transport combines
+      road and rail with aviation and shipping.
+    source: >-
+      Climate Watch / World Resources Institute via Our World in Data,
+      retrieved 7 August 2026. India total 4.14 billion tonnes of greenhouse
+      gases; world total 51.5 billion tonnes.
+
+  # Exhibit A of 11-solutions-by-source.md. The source drew the bar out of block
+  # characters inside a Markdown table. A plain bar chart was tried and rejected:
+  # the same five shares are already charted in ex-sector-split, so a second bar
+  # chart would repeat the earlier page and drop the two columns that are the
+  # whole point - the solution and the catch attached to it.
+  - id: ex-sector-at-a-glance
+    question: q-2-4
+    chart: sector_table
+    width: full
+    category: sector
+    value: share
+    dp: 0
+    unit: "%"
+    name_label: Sector
+    value_label: Share
+    name_width: 26
+    value_x: 35
+    bar_x: 37
+    bar_width: 25
+    bar_height: 6.5
+    text_size: 7.5
+    columns:
+      - key: solution
+        label: The solution
+        x: 67
+        w: 48
+      - key: challenge
+        label: The challenge attached to it
+        x: 119
+        w: 57
+    colours: ["#1a50a0", "#5a439e", "#c03d5b", "#902b94", "#0581a8"]
+    title: >-
+      Every sector already has a working solution, and every one of them
+      has a physical catch
+    subtitle: >-
+      Share of India's greenhouse gases, percent, 2023, rounded to the nearest
+      whole number. Largest first. Bars run to a common scale of 40.
+    note: >-
+      Shares are rounded, so they add to 100 only approximately. The solutions
+      are the mature ones, in use somewhere in the world today. Carbon capture,
+      direct air capture and hydrogen for anything other than steel are left
+      out, because each is under 1 percent deployed and naming them would make
+      the picture look fuller than it is. That choice is ours.
+    source: >-
+      Shares from Climate Watch / World Resources Institute via Our World in
+      Data, retrieved 7 August 2026. Solutions and their physical limits from
+      the IEA World Energy Outlook and India Energy Outlook, and NITI Aayog.
+
+  # Exhibit B of the same answer, and the one piece of the report that is a
+  # picture rather than a chart. The argument is the arrows, not the lengths,
+  # so no bar, line or stack can carry it. Every figure on it, including the
+  # 43 percent, is summed from the data file rather than typed in.
+  - id: ex-power-is-the-gate
+    question: q-2-4
+    chart: gate_diagram
+    width: full
+    category: sector
+    value: share
+    role_key: role
+    solution_key: solution
+    note_key: note
+    head_label: Three sectors that wait on power
+    why: >-
+      because every one of these solutions runs on electricity
+    claims:
+      - "Clean this one, and {total} percent of India's carbon moves with it."
+      - "Leave it dirty, and none of the three can move."
+    divider: Outside the system
+    colours:
+      Power: "#1a50a0"
+      Industry: "#5a439e"
+      Farming: "#c03d5b"
+      Buildings: "#902b94"
+      Transport: "#0581a8"
+    title: >-
+      Three sectors cannot move until power moves; farming is the one
+      that never will
+    subtitle: >-
+      Share of India's greenhouse gases, percent, 2023, rounded. Arrows mark
+      the sectors whose main solution needs clean electricity.
+    note: >-
+      The arrangement is ours. Clean electricity is necessary for the three
+      sectors above, not sufficient - each also has to replace its own
+      furnaces, coolers and vehicles. Farming sits outside because its gases
+      are biological rather than energy, so the grid behind it makes no
+      difference either way.
+    source: >-
+      Shares from Climate Watch / World Resources Institute via Our World in
+      Data, retrieved 7 August 2026. Solutions from the IEA World Energy
+      Outlook and India Energy Outlook, and NITI Aayog.
+
+  # The bar block in section 3.1 of 12-power.md, set in type. Eight readings,
+  # plotted as read. A line chart was tried here first and rejected: joining
+  # eight points draws a curve between them that nobody measured.
+  - id: ex-day-curve
+    question: q-2-5
+    chart: grouped_hbar
+    width: full
+    label_width: 16
+    value_width: 26
+    bar_height: 7
+    bar_gap: 1.5
+    group_gap: 6
+    head: 14
+    dp: 0
+    title: >-
+      India's demand peaks at 22:36, when solar output is zero
+    subtitle: >-
+      Gigawatts. Eight readings through 24 May 2026.
+    category: time
+    row_note: callout
+    unit: GW
+    series:
+      - key: demand
+        label: Demand
+        colour: "#1a50a0"
+      - key: solar
+        label: Solar
+        colour: "#902b94"
+    note: >-
+      The 22:36 peak of 248 gigawatts and the roughly 60-gigawatt evening ramp
+      are measured. The six readings in between are indicative of the shape of
+      the day, not exact half-hourly values.
+    source: >-
+      Grid-India daily reports and the Central Electricity Authority,
+      24 May 2026.
