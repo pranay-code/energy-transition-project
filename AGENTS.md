@@ -56,3 +56,28 @@
 * `design/`: the look of the final PDF (design brief, layout plan, colours, chart data, logo).
 * `archive/`: older versions of every question, kept for facts. Read-only.
 * `SOURCES.md`: links to the main source reports.
+
+## 8. Restructuring Intent and Proposed Structure
+
+### Intent of Change
+To make the narrative flow more logical and compelling, the report moves away from repeating the full solution and challenge cycle sector by sector. Instead, it follows a clean thematic progression:
+1. **Map the battlefield first:** Deeply break down all emissions and sub-sources across every sector before discussing fixes.
+2. **Explore solutions and physical bottlenecks together:** Identify the fixes, their physical limits, and establish what must be tackled first (electricity as the master key).
+3. **Present India's official roadmap:** Examine the established policies, missions, and targets.
+4. **Conduct an honest reality check:** Assess progress against targets, explaining why some are ahead and why others are lagging.
+5. **Draw learnings and chart the path forward:** Synthesize lessons, action priorities, and deliver the two payoffs (Version A: National Conclusion; Version B: Energy Group Opportunity).
+
+### Proposed 8-Chapter Structure
+* **Chapter 1: The Beginning:** Climate basics, rapid change, attribution, and mechanisms.
+* **Chapter 2: Eye Opening and Getting Ready:** Global action, the Paris Agreement, and country emissions comparisons.
+* **Chapter 3: Our Pathway to the Common Goal Gate:** India's promises (2030 and 2070 targets) and the equity/time reasoning.
+* **Chapter 4: Breaking Down the Problem!:** Deep breakdown of all emissions (Power, Industry, Farming, Buildings & Waste, Transport, and the natural sponge) without discussing solutions yet.
+* **Chapter 5: Big Problem, Let's Solve It: What First?:** Solutions and physical challenges across sectors, highlighting why electricity is the gatekeeper.
+* **Chapter 6: The Plan:** India's established plans and targets to tackle the problem (missions, policies, capacity targets).
+* **Chapter 7: Reality Check:** Assessing targets, reasons for shortfalls where missing, and reasons for overshooting or achieving set targets.
+* **Chapter 8: Let's Get Moving:** Key learnings, how to move forward, and the two final payoff versions (Version A: General Audience; Version B: Energy Group Edition).
+
+### Next Step
+* **Status:** Under Review.
+* **Next Action:** User review and approval of this proposed structure before updating `STORYLINE.md` and restructuring `draft/revised_draft.md`.
+
